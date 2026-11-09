@@ -6,23 +6,11 @@ import java.util.Scanner;
 public class AgendaContactos {
 
     private ArrayList<Contacto> contactos;
-    private int capacidadMaxima;
 
     // Constructor
     public AgendaContactos() {
         contactos = new ArrayList<>(10);
-        capacidadMaxima = 10;
     }
-
-//    public AgendaContactos(int capacidadMaxima) {
-//        contactos = new ArrayList<>();
-//
-//        if (capacidadMaxima > 0) {
-//            this.capacidadMaxima = capacidadMaxima;
-//        } else {
-//            this.capacidadMaxima = 10;
-//        }
-//    }
 
     // ******************* Añadir contacto *********************************
     public void añadirContacto(Contacto c) {
@@ -187,6 +175,6 @@ public class AgendaContactos {
 
     // ******************** Espacios Libres **********************************
     public String espaciosLibre(){
-        return "Se pueden agregar "+ (10 - this.contactos.size()+" contactos mas");
+        return "Se pueden agregar "+ (10 - this.contactos.size()+" contactos más");
     }
 }
