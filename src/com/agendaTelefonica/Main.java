@@ -1,7 +1,5 @@
 package com.agendaTelefonica;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -16,7 +14,7 @@ public class Main {
         System.out.println("*** Bienvenido a nuestra Agenda Telefonica ***");
         System.out.println();
 
-        while(!salir){ // Mientras salir valga false...
+        while(!salir){ // Mientras salir sea false...
             try{
                 var opcion = mostrarMenu(entrada);
                 salir = ejecutarOpciones(opcion, entrada, contactos);
@@ -52,13 +50,13 @@ public class Main {
 
         switch(opcion){
             case 1 -> agregarContacto(entrada, contactos);
-            case 2 -> existeContacto(entrada); // falta mandar contactos
+            case 2 -> existeContacto(entrada, contactos);
             case 3 -> listarContactos(contactos);
-            case 4 -> buscarContacto(entrada); // falta mandar contactos
-            case 5 -> elminarContacto(entrada); // falta mandar contactos
-            case 6 -> modificarTelefono(entrada); // falta mandar contactos
-            case 7 -> agendaEstaLlena(); // falta mandar contactos
-            case 8 -> mostrarEspaciosLibres(); // falta mandar contactos
+            case 4 -> buscarContacto(entrada, contactos);
+            case 5 -> elminarContacto(entrada, contactos);
+            case 6 -> modificarTelefono(entrada, contactos);
+            case 7 -> agendaEstaLlena(contactos);
+            case 8 -> mostrarEspaciosLibres(contactos);
             case 9 -> {
                 System.out.println("Regresa pronto!");
                 salir = true;
@@ -81,51 +79,62 @@ public class Main {
         contactos.añadirContacto(new Contacto(nombre, apellido, telefono));
     }
 
-    private static void existeContacto(Scanner entrada){
+    private static void existeContacto(Scanner entrada, AgendaContactos contactos){
         System.out.print("Nombre del contacto: ");
         var nombre = entrada.nextLine();
         System.out.print("Apellido del contacto: ");
         var aoellido = entrada.nextLine();
-        //contactos.existeContacto(new Contacto(nombre, apellido);
+        System.out.print("Telefono del contacto: ");
+        var telefono = entrada.nextLine();
+
+        var existeContacto = contactos.existeContacto(new Contacto (nombre, aoellido, telefono));
+        if(existeContacto){
+            System.out.println("El contacto ya existe en tu agenda");
+        }
+        else{
+            System.out.println("El contacto aún no existe en tu agenda");
+        }
     }
 
     private static void listarContactos(AgendaContactos contactos){
         contactos.listarContactos();
     }
 
-    private static void buscarContacto(Scanner entrada){
+    private static void buscarContacto(Scanner entrada, AgendaContactos contactos){
         System.out.print("Nombre del contacto: ");
         var nombre = entrada.nextLine();
 
-        // contactos.buscarContacto(nombre);
+        System.out.print("Apellido del contacto: ");
+        var apellido = entrada.nextLine();
+
+        contactos.buscarContacto(nombre, apellido);
     }
 
-    private static void elminarContacto(Scanner entrada){
+    private static void elminarContacto(Scanner entrada, AgendaContactos contactos){
         System.out.print("Nombre del contacto: ");
         var nombre = entrada.nextLine();
         System.out.print("Apellido del contacto: ");
-        var aoellido = entrada.nextLine();
+        var apellido = entrada.nextLine();
         System.out.print("Telefono del contacto: ");
         var telefono = entrada.nextLine();
 
-        //contactos.eliminarContacto(new Contacto(nombre, apellido, telefono);
+        contactos.eliminarContacto(new Contacto(nombre, apellido, telefono));
     }
 
-    private static void modificarTelefono(Scanner entrada){
+    private static void modificarTelefono(Scanner entrada, AgendaContactos contactos){
         System.out.print("Nombre del contacto: ");
         var nombre = entrada.nextLine();
         System.out.print("Apellido del contacto: ");
-        var aoellido = entrada.nextLine();
-        System.out.print("Telefono del contacto: ");
-        var telefono = entrada.nextLine();
-        //contactos.modificarTelefono(new Contacto(nombre, apellido, telefono);
+        var apellido = entrada.nextLine();
+        contactos.modificarTelefono(nombre, apellido);
     }
 
-    private static void agendaEstaLlena(){
-        //contactos.agendaLlena()
+    private static void agendaEstaLlena(AgendaContactos contactos){
+        var agendaEstaLLena = contactos.agendaLlena();
+        System.out.println(agendaEstaLLena ? "Agenda llena, no puedes agregar mas contactos" : "Agenda con espacio disponible, puede agregar nuevos contactos");
     }
 
-    private static void mostrarEspaciosLibres(){
-        //contactos.espaciosLibres();
+    private static void mostrarEspaciosLibres(AgendaContactos contactos){
+        System.out.println(contactos.espaciosLibre());
     }
 }

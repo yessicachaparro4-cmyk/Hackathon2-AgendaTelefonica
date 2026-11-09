@@ -12,9 +12,7 @@ public class Contacto {
         this.apellido = apellido;
         this.telefono = numero;
     }
-    public void modificarContacto(String nuevoTelefono) {
-        this.telefono = nuevoTelefono;
-    }
+
     public String getNombre() {
         return nombre;
     }
@@ -24,6 +22,11 @@ public class Contacto {
     public String getTelefono() {
         return telefono;
     }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
     public int getIdContacto() {
         return idContacto;
     }

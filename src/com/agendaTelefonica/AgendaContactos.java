@@ -1,6 +1,7 @@
 package com.agendaTelefonica;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class AgendaContactos {
 
@@ -9,7 +10,7 @@ public class AgendaContactos {
 
     // Constructor
     public AgendaContactos() {
-        contactos = new ArrayList<>();
+        contactos = new ArrayList<>(10);
         capacidadMaxima = 10;
     }
 
@@ -23,7 +24,7 @@ public class AgendaContactos {
 //        }
 //    }
 
-    // Añadir contacto
+    // ******************* Añadir contacto *********************************
     public void añadirContacto(Contacto c) {
 
         if (c == null || c.getNombre() == null || c.getApellido() == null) {
@@ -36,22 +37,39 @@ public class AgendaContactos {
             return;
         }
 
-//        if (existeContacto(c)) {
-//            System.out.println("El contacto ya existe.");
-//            return;
-//        }
-//
-//        if (agendaLlena()) {
-//            System.out.println("La agenda está llena.");
-//            return;
-//        }
+        if (existeContacto(c)) {
+            System.out.println("El contacto ya existe.");
+            return;
+        }
+
+        if (agendaLlena()) {
+            System.out.println("Agenda llena, no se puede agregar nuevos contactos");
+            return;
+        }
 
         contactos.add(c);
         System.out.println("Contacto añadido correctamente.");
     }
 
+    // ******************** Existe contacto **********************************
 
-// Listar Contactos
+    public boolean existeContacto(Contacto c) {
+        for (Contacto contactoActual : contactos) {
+
+            boolean mismoNombre = contactoActual.getNombre()
+                    .equalsIgnoreCase(c.getNombre());
+
+            boolean mismoApellido = contactoActual.getApellido()
+                    .equalsIgnoreCase(c.getApellido());
+
+            if (mismoNombre && mismoApellido) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // ******************** Listar Contactos *********************************
 
     public void listarContactos() {
 
@@ -88,83 +106,9 @@ public class AgendaContactos {
         }
     }
 
-    // Mariana
-
-//    public List<Contacto> getContactos() {
-//        return contacto;
-//    }
-//
-//    public void setContactos(List<Contacto> contacto) {
-//        this.contacto = contacto;
-//    }
-//
-//    public AgendaContactos(List<Contacto> contacto) {
-//        setContactos(contacto);
-//    }
-//
-//    public String agendaLlena (){
-//        if(this.contacto.size() == 10){
-//            return "Agenda llena, no se puede agregar nuevos contactos";
-//        }else {
-//            return "Agenda con espacio disponible, puede agregar nuevos contactos";
-//        }
-//    }
-//
-//    public String espaciosLibre(){
-//        return "Se pueden agregar "+ (10 - this.contacto.size()+" contactos nuevos");
-//    }
-}
-
-/*
-
-package com.agendaTelefonica;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class AgendaContactos {
-   private  List<Contacto> contacto = new ArrayList<Contacto>(10);
-
-    public List<Contacto> getContactos() {
-        return contacto;
-    }
-
-    public void setContactos(List<Contacto> contacto) {
-        this.contacto = contacto;
-    }
-
-    public AgendaContactos(List<Contacto> contacto) {
-        setContactos(contacto);
-    }
-
-    public String agendaLlena (){
-        if(this.contacto.size() == 10){
-            return "Agenda llena, no se puede agregar nuevos contactos";
-        }else {
-            return "Agenda con espacio disponible, puede agregar nuevos contactos";
-        }
-    }
-
-    public String espaciosLibre(){
-        return "Se pueden agregar "+ (10 - this.contacto.size()+" contactos nuevos");
-    }
-    public boolean existeContacto(Contacto c) {
-        for (Contacto contactoActual : contacto) {
-
-            boolean mismoNombre = contactoActual.getNombre()
-                    .equalsIgnoreCase(c.getNombre());
-
-            boolean mismoApellido = contactoActual.getApellido()
-                    .equalsIgnoreCase(c.getApellido());
-
-            if (mismoNombre && mismoApellido) {
-                return true;
-            }
-        }
-        return false;
-    }
+    // ******************** Buscar Contacto **********************************
     public void buscarContacto(String nombre, String apellido) {
-        for (Contacto contactoActual : contacto) {
+        for (Contacto contactoActual : contactos) {
 
             boolean mismoNombre = contactoActual.getNombre()
                     .equalsIgnoreCase(nombre);
@@ -180,10 +124,12 @@ public class AgendaContactos {
 
         System.out.println("Contacto no encontrado");
     }
+
+    // ******************** Eliminar Contacto ********************************
     public void eliminarContacto(Contacto c) {
         Contacto contactoEncontrado = null;
 
-        for (Contacto contactoActual : contacto) {
+        for (Contacto contactoActual : contactos) {
 
             boolean mismoNombre = contactoActual.getNombre()
                     .equalsIgnoreCase(c.getNombre());
@@ -198,11 +144,49 @@ public class AgendaContactos {
         }
 
         if (contactoEncontrado != null) {
-            contacto.remove(contactoEncontrado);
+            contactos.remove(contactoEncontrado);
             System.out.println("Contacto eliminado correctamente");
         } else {
             System.out.println("El contacto no existe en la agenda");
         }
     }
+
+    // ******************** Modificar telefono *******************************
+    public void modificarTelefono(String nombre, String apellido){
+        for (Contacto contactoActual : contactos) {
+
+            boolean mismoNombre = contactoActual.getNombre()
+                    .equalsIgnoreCase(nombre);
+
+            boolean mismoApellido = contactoActual.getApellido()
+                    .equalsIgnoreCase(apellido);
+
+            if (mismoNombre && mismoApellido) {
+                System.out.println("Contacto encontrado...");
+                System.out.println("Teléfono actual : " + contactoActual.getTelefono());
+                Scanner entrada = new Scanner(System.in);
+                System.out.print("Introduce el nuevo numero de telefono: ");
+                var nuevoTelefono = entrada.nextLine();
+                contactoActual.setTelefono(nuevoTelefono);
+                System.out.println("Teléfono actualizado correctamente.");
+                return;
+            }
+        }
+
+        System.out.println("Contacto no encontrado");
+    }
+
+    // ******************** Agenda llena *************************************
+    public boolean agendaLlena (){
+        if(this.contactos.size() == 10){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // ******************** Espacios Libres **********************************
+    public String espaciosLibre(){
+        return "Se pueden agregar "+ (10 - this.contactos.size()+" contactos mas");
+    }
 }
-*/
