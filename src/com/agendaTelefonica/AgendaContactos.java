@@ -4,14 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AgendaContactos {
-    List<Contacto> contactos = new ArrayList<Contacto>(10);
+   private  List<Contacto> contacto = new ArrayList<Contacto>(10);
 
-    public AgendaContactos(List<Contacto> contactos) {
-        this.contactos = contactos;
+    public List<Contacto> getContactos() {
+        return contacto;
+    }
+
+    public void setContactos(List<Contacto> contacto) {
+        this.contacto = contacto;
+    }
+
+    public AgendaContactos(List<Contacto> contacto) {
+        setContactos(contacto);
     }
 
     public String agendaLlena (){
-        if(this.contactos.size() == 10){
+        if(this.contacto.size() == 10){
             return "Agenda llena, no se puede agregar nuevos contactos";
         }else {
             return "Agenda con espacio disponible, puede agregar nuevos contactos";
@@ -19,7 +27,7 @@ public class AgendaContactos {
     }
 
     public String espaciosLibre(){
-        return "Se pueden agregar "+ (10 - this.contactos.size()+" contactos nuevos");
+        return "Se pueden agregar "+ (10 - this.contacto.size()+" contactos nuevos");
     }
 
 }
