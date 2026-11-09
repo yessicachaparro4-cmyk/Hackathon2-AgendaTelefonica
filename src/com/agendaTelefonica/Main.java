@@ -12,14 +12,14 @@ public class Main {
     public static void agendaTelefonica(){
         Scanner entrada = new Scanner(System.in);
         var salir = false;
-        // AgendaContactos contactos = new AgendaContactos();
+        AgendaContactos contactos = new AgendaContactos();
         System.out.println("*** Bienvenido a nuestra Agenda Telefonica ***");
         System.out.println();
 
         while(!salir){ // Mientras salir valga false...
             try{
                 var opcion = mostrarMenu(entrada);
-                salir = ejecutarOpciones(opcion, entrada);
+                salir = ejecutarOpciones(opcion, entrada, contactos);
             }
             catch(Exception e){
                 System.out.println("Ocurrio un error: " + e.getMessage());
@@ -47,13 +47,13 @@ public class Main {
         return Integer.parseInt(entrada.nextLine());
     }
 
-    private static boolean ejecutarOpciones(int opcion, Scanner entrada){
+    private static boolean ejecutarOpciones(int opcion, Scanner entrada, AgendaContactos contactos){
         var salir = false;
 
         switch(opcion){
-            case 1 -> agregarContacto(entrada); // falta mandar contactos
+            case 1 -> agregarContacto(entrada, contactos);
             case 2 -> existeContacto(entrada); // falta mandar contactos
-            case 3 -> listarContactos(); // falta mandar contactos
+            case 3 -> listarContactos(contactos);
             case 4 -> buscarContacto(entrada); // falta mandar contactos
             case 5 -> elminarContacto(entrada); // falta mandar contactos
             case 6 -> modificarTelefono(entrada); // falta mandar contactos
@@ -68,17 +68,17 @@ public class Main {
         return salir;
     }
 
-    private static void agregarContacto(Scanner entrada){
+    private static void agregarContacto(Scanner entrada, AgendaContactos contactos){
         // Verificar capacidad de la agenda ???
 
         System.out.print("Nombre del contacto: ");
         var nombre = entrada.nextLine();
         System.out.print("Apellido del contacto: ");
-        var aoellido = entrada.nextLine();
+        var apellido = entrada.nextLine();
         System.out.print("Telefono del contacto: ");
         var telefono = entrada.nextLine();
 
-        //contactos.agregarContacto(new Contacto(nombre, apellido, telefono);
+        contactos.añadirContacto(new Contacto(nombre, apellido, telefono));
     }
 
     private static void existeContacto(Scanner entrada){
@@ -89,8 +89,8 @@ public class Main {
         //contactos.existeContacto(new Contacto(nombre, apellido);
     }
 
-    private static void listarContactos(){
-        // contactos.listarContactos();
+    private static void listarContactos(AgendaContactos contactos){
+        contactos.listarContactos();
     }
 
     private static void buscarContacto(Scanner entrada){

@@ -7,20 +7,21 @@ public class AgendaContactos {
     private ArrayList<Contacto> contactos;
     private int capacidadMaxima;
 
+    // Constructor
     public AgendaContactos() {
         contactos = new ArrayList<>();
         capacidadMaxima = 10;
     }
 
-    public AgendaContactos(int capacidadMaxima) {
-        contactos = new ArrayList<>();
-
-        if (capacidadMaxima > 0) {
-            this.capacidadMaxima = capacidadMaxima;
-        } else {
-            this.capacidadMaxima = 10;
-        }
-    }
+//    public AgendaContactos(int capacidadMaxima) {
+//        contactos = new ArrayList<>();
+//
+//        if (capacidadMaxima > 0) {
+//            this.capacidadMaxima = capacidadMaxima;
+//        } else {
+//            this.capacidadMaxima = 10;
+//        }
+//    }
 
     // Añadir contacto
     public void añadirContacto(Contacto c) {
@@ -35,15 +36,15 @@ public class AgendaContactos {
             return;
         }
 
-        if (existeContacto(c)) {
-            System.out.println("El contacto ya existe.");
-            return;
-        }
-
-        if (agendaLlena()) {
-            System.out.println("La agenda está llena.");
-            return;
-        }
+//        if (existeContacto(c)) {
+//            System.out.println("El contacto ya existe.");
+//            return;
+//        }
+//
+//        if (agendaLlena()) {
+//            System.out.println("La agenda está llena.");
+//            return;
+//        }
 
         contactos.add(c);
         System.out.println("Contacto añadido correctamente.");
@@ -89,29 +90,29 @@ public class AgendaContactos {
 
     // Mariana
 
-    public List<Contacto> getContactos() {
-        return contacto;
-    }
-
-    public void setContactos(List<Contacto> contacto) {
-        this.contacto = contacto;
-    }
-
-    public AgendaContactos(List<Contacto> contacto) {
-        setContactos(contacto);
-    }
-
-    public String agendaLlena (){
-        if(this.contacto.size() == 10){
-            return "Agenda llena, no se puede agregar nuevos contactos";
-        }else {
-            return "Agenda con espacio disponible, puede agregar nuevos contactos";
-        }
-    }
-
-    public String espaciosLibre(){
-        return "Se pueden agregar "+ (10 - this.contacto.size()+" contactos nuevos");
-    }
+//    public List<Contacto> getContactos() {
+//        return contacto;
+//    }
+//
+//    public void setContactos(List<Contacto> contacto) {
+//        this.contacto = contacto;
+//    }
+//
+//    public AgendaContactos(List<Contacto> contacto) {
+//        setContactos(contacto);
+//    }
+//
+//    public String agendaLlena (){
+//        if(this.contacto.size() == 10){
+//            return "Agenda llena, no se puede agregar nuevos contactos";
+//        }else {
+//            return "Agenda con espacio disponible, puede agregar nuevos contactos";
+//        }
+//    }
+//
+//    public String espaciosLibre(){
+//        return "Se pueden agregar "+ (10 - this.contacto.size()+" contactos nuevos");
+//    }
 }
 
 /*
