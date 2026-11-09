@@ -1,21 +1,16 @@
 package com.agendaTelefonica;
 
 import java.util.ArrayList;
-import java.util.List;
-
 public class AgendaContactos {
-   private  List<Contacto> contacto = new ArrayList<Contacto>(10);
+   private  ArrayList<Contacto> contacto;
 
-    public List<Contacto> getContactos() {
+    public ArrayList<Contacto> getContactos() {
         return contacto;
     }
 
-    public void setContactos(List<Contacto> contacto) {
-        this.contacto = contacto;
-    }
 
-    public AgendaContactos(List<Contacto> contacto) {
-        setContactos(contacto);
+    public AgendaContactos() {
+    this.contacto = new ArrayList<Contacto>(10);
     }
 
     public String agendaLlena (){
