@@ -121,7 +121,7 @@ El programa se puede usar **en cualquier computadora con Java 17**, con o sin un
 **Con Git:**
 
 ```bash
-git clone https://github.com/marianaaquinoalarcon/Hackathon2-AgendaTelefonica.git
+git clone https://github.com/yessicachaparro4-cmyk/Hackathon2-AgendaTelefonica.git
 ```
 
 Luego entra a la carpeta del proyecto desde la terminal:
